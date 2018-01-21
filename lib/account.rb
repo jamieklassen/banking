@@ -33,7 +33,7 @@ class Account
   end
 
   def last_pay_transaction
-    transactions.select { |t| t.description.include? 'PAYROLL' }.last
+    transactions.select { |t| t.description.include? Cibc::PAY_KEYWORD }.last
   end
 
   def last_pay_date

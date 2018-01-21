@@ -9,6 +9,8 @@ require_relative 'api_call'
 require_relative 'account'
 
 class Cibc
+  PAY_KEYWORD = 'PAY CRTXMLDAT CGI'
+
   def accounts
     @accounts ||= get_accounts
   end
@@ -32,7 +34,7 @@ class Cibc
   def pay_account
     accounts.find do |account|
       account.deposit? && account.transactions.any? do |transaction|
-        transaction.description.include? 'PAY CRTXMLDAT CGI'
+        transaction.description.include? PAY_KEYWORD
       end
     end
   end
